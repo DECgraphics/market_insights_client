@@ -9,7 +9,8 @@ import { AppDispatch, RootState } from '../../state/store';
 import { MarkerType } from '../../types/Marker';
 import { getPreviousMapCoordinates } from '../../state/map/mapSlice';
 import * as geojson from 'geojson';
-import EditControlFC from '../../hooks/useEditControl';
+import EditControlFC from './drawTools';
+import DrawTools from './drawTools';
 
 
 
@@ -97,21 +98,19 @@ export default function Map() {
             height: '100vh',
             width: '100%'
         }}>
-            {/* <EditControlFC
-   
-            /> */}
+            <DrawTools/>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <GeoJSON data={geojsonFeatureCollection}  />
+            {/* <GeoJSON data={geojsonFeatureCollection}  /> */}
 
-            <MarkerClusterGroup
+            {/* <MarkerClusterGroup
                 chunckedkLoading
                  inconCreateFunction={createCustomClusterIcon}
             > 
                 {mapMarkers}
-            </MarkerClusterGroup>
+            </MarkerClusterGroup> */}
         </MapContainer>
         </>
     )
