@@ -65,44 +65,8 @@ export default function Map() {
             )
     })): null
 
-    var geojsonFeature: geojson.Feature  = {
-        "type": "Feature",
-        "properties": {
-            "name": "Coors Field",
-            "amenity": "Baseball Stadium",
-            "popupContent": "This is where the Rockies play!"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [-104.99404, 39.75621]
-        }
-    };
-    const sampleGeoJson= {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [-104.99404, 39.75621]
-            },
-            "properties": {
-              "name": "Denver"
-            }
-          },
-          // Add more features as needed
-        ]
-      };
 
-      let geojsonMultiPolygon: geojson.MultiPolygon = {
-        type: "MultiPolygon",
-        coordinates: [
-           [ [ [ -73.958, 40.8003 ], [ -73.9498, 40.7968 ], [ -73.9737, 40.7648 ], [ -73.9814, 40.7681 ], [ -73.958, 40.8003 ] ] ],
-           [ [ [ -73.958, 40.8003 ], [ -73.9498, 40.7968 ], [ -73.9737, 40.7648 ], [ -73.958, 40.8003 ] ] ]
-        ]
-      }
-
-      let geojsonFeatureCollection: geojson.FeatureCollection = {
+    let geojsonFeatureCollection: geojson.FeatureCollection = {
         "type": "FeatureCollection",
         "features": [
           {
@@ -159,8 +123,6 @@ export default function Map() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <GeoJSON data={geojsonFeatureCollection}  />
-            {/* <GeoJSON data={geoJsonPoint} /> */}
-
 
             <MarkerClusterGroup
                 chunckedkLoading
