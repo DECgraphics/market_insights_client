@@ -10,24 +10,6 @@ import { MarkerType } from '../../types/Marker';
 import { getPreviousMapCoordinates } from '../../state/map/mapSlice';
 import * as geojson from 'geojson';
 import EditControlFC from '../../hooks/useEditControl';
-// import { EditControl } from "react-leaflet-draw"
-
-
-
-
-var myLines = [{
-    "type": "LineString",
-    "coordinates": [[-100, 40], [-105, 45], [-110, 55]]
-}, {
-    "type": "LineString",
-    "coordinates": [[-105, 40], [-110, 45], [-115, 55]]
-}];
-
-
-// L.geoJSON(geojsonFeature).addTo(map);
-
-
-
 
 
 
