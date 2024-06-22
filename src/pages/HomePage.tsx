@@ -16,7 +16,7 @@ function HomePage() {
 
   return (
     <>
-        {/* <Box sx={{
+        <Box sx={{
           zIndex: 999,
           position: 'absolute',
           right: 10,
@@ -34,7 +34,7 @@ function HomePage() {
             await auth.signOut()
             dispatch(unauthorise())
           }}>Logout</Button>
-        </Box> */}
+        </Box>
         <Map/>
     </>
   )

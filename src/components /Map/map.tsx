@@ -105,12 +105,12 @@ export default function Map() {
             />
             {/* <GeoJSON data={geojsonFeatureCollection}  /> */}
 
-            {/* <MarkerClusterGroup
+            <MarkerClusterGroup
                 chunckedkLoading
                  inconCreateFunction={createCustomClusterIcon}
             > 
                 {mapMarkers}
-            </MarkerClusterGroup> */}
+            </MarkerClusterGroup>
         </MapContainer>
         </>
     )

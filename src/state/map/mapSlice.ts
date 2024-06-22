@@ -23,6 +23,7 @@ const mapSlice = createSlice({
         builder.addCase(getPreviousMapCoordinates.pending, () => {
             console.log('coordinates pending')
         }).addCase(getPreviousMapCoordinates.fulfilled, (state, action: PayloadAction<MarkerType[]>) => {
+            console.log(action.payload)
             state.coordinates = action.payload
         })
     }
