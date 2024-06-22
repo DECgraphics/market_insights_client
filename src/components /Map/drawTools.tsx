@@ -12,9 +12,17 @@ import {
 import { EditControl } from "react-leaflet-draw";
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css'
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../state/store";
+import { setMinMaxlatLng } from "../../state/map/mapSlice";
 
 
 const DrawTools = () => {
+
+	const dispatch = useDispatch<AppDispatch>()
+
+
+
 	const _onEdited = (e: any) => {
 		let numEdited = 0;
 		e.layers.eachLayer((layer: any) => {
@@ -37,6 +45,39 @@ const DrawTools = () => {
 
 		console.log("Geojson", layer.toGeoJSON());
 		console.log("coords", layer.getLatLngs());
+
+
+		let minMaxLatLng = {
+			maxLat: -86,
+			maxLng: -181,
+			minLat: 86,
+			minLng: 181
+		}
+
+
+		let coords = layer.getLatLngs()
+		console.log(coords);
+		coords[0].forEach((latLng: any, i: number) => {
+			console.log(latLng)
+			minMaxLatLng.maxLat = Math.max(minMaxLatLng.maxLat, latLng.lat)
+			minMaxLatLng.maxLng = Math.max(minMaxLatLng.maxLng, latLng.lng)
+			minMaxLatLng.minLat = Math.min(minMaxLatLng.minLat, latLng.lat)
+			minMaxLatLng.minLng = Math.min(minMaxLatLng.minLng, latLng.lng)
+		})
+
+		dispatch(setMinMaxlatLng(minMaxLatLng))
+
+		// console.log( {
+		// 	maxLat, 
+		// 	maxLng, 
+		// 	minLat,
+		// 	minLng, 
+		// })
+
+
+
+
+
 		// Do whatever else you need to. (save to db; etc)
 
 		// this._onChange();

@@ -9,10 +9,23 @@ import { auth } from '../firebase';
 import { unauthorise } from '../state/auth/authSlice';
 import Map from '../components /Map/map';
 
+import axios from 'axios'
+import { getMinMaxLatLngLocations } from '../state/map/mapSlice';
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
+
 function HomePage() {
 
   const dispatch = useDispatch<AppDispatch>()
   const user = useSelector((state: RootState) => state.auth.user)
+  const minMaxLatLng = useSelector((state: RootState) => state.map.minMaxlatLng)
+  const res = useSelector((state: RootState) => state.map.response)
+
+
+
+  const [mapLongLat, setMapLongLat] = useState<string>('none')
+
+
 
   return (
     <>
@@ -34,7 +47,64 @@ function HomePage() {
             await auth.signOut()
             dispatch(unauthorise())
           }}>Logout</Button>
+          <br/>
+          <br/>
+          <hr/>
+          <br/>
+
+
+
+          <Button variant='contained' onClick={async () => {
+
+            try {
+              let response = await axios.get(`${baseUrl}/search/?full_postcode=CA10%203EX`)
+              let message = response.data;
+              console.log(message)
+
+              setMapLongLat(`lat: ${message[0].latitude}`)
+              
+            } catch (error) {
+              console.log(error)
+            }
+          
+          }}>CA10 3EX</Button>
+
+          <br/>
+
+          <p>Result:</p>
+          <p>{mapLongLat}</p>
+
+
+          <br/>
+          <br/>
+          <hr/>
+          <br/>
+
+
+
+          <Button variant='contained' onClick={async () => {
+
+            dispatch(getMinMaxLatLngLocations(minMaxLatLng))
+          
+          }}>Search</Button>
+
+          <br/>
+
+          <p>Result:</p>
+          <p>maxLat: {minMaxLatLng.maxLat}</p>
+          <p>maxLng: {minMaxLatLng.maxLng}</p>
+          <p>minLat: {minMaxLatLng.minLat}</p>
+          <p>minLng: {minMaxLatLng.minLng}</p>
+          <br/>
+          <p>{res}</p>
+
         </Box>
+
+        
+
+
+
+
         <Map/>
     </>
   )

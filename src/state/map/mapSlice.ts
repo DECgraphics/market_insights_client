@@ -1,14 +1,23 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { MarkerType } from "../../types/Marker";
+import { MarkerType, MinMaxLatLng } from "../../types/Marker";
 
 let baseUrl = process.env.REACT_APP_BASE_URL
 
 interface MapState {
     coordinates: MarkerType[]
+    minMaxlatLng: MinMaxLatLng
+    response: any[]
 }
 
 const initialState: MapState = {
-    coordinates: []
+    coordinates: [],
+    minMaxlatLng: {
+        maxLat: -86,
+		maxLng: -181,
+		minLat: 86,
+		minLng: 181
+    },
+    response: [] 
 }
 
 const mapSlice = createSlice({
@@ -17,6 +26,9 @@ const mapSlice = createSlice({
     reducers: {
         clearMap: (state) => {
             state.coordinates = []
+        },
+        setMinMaxlatLng: (state, action: PayloadAction<MinMaxLatLng>) => {
+            state.minMaxlatLng = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -26,6 +38,14 @@ const mapSlice = createSlice({
             console.log(action.payload)
             state.coordinates = action.payload
         })
+
+        builder.addCase(getMinMaxLatLngLocations.pending, () => {
+            console.log('response pending')
+        }).addCase(getMinMaxLatLngLocations.fulfilled, (state, action: PayloadAction<any[]>) => {
+            console.log(action.payload)
+            state.response = action.payload
+        })
+
     }
 })
 
@@ -38,6 +58,15 @@ export const getPreviousMapCoordinates = createAsyncThunk(
     }
 )
 
-export const { clearMap } = mapSlice.actions
+export const getMinMaxLatLngLocations = createAsyncThunk(
+    'map/getMinMaxLatLngLocations',
+    async (latLng: MinMaxLatLng) => {
+        const response = await fetch(`${baseUrl}/search/?min_lat=${latLng.minLat}&max_lat=${latLng.maxLat}&min_lon=${latLng.minLng}&max_lon=${latLng.maxLng}`)
+        const coorditates = (await response.json()) as any[]
+        return coorditates
+    }
+)
+
+export const { setMinMaxlatLng, clearMap } = mapSlice.actions
 
 export default mapSlice.reducer
