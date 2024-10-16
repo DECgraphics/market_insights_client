@@ -50,7 +50,7 @@ function HomePage() {
           <br/>
           <hr/>
           <br/>
-          {/* <Button variant='contained' onClick={async () => {
+          <Button variant='contained' onClick={async () => {
             try {
               let response = await axios.get(`${baseUrl}/search/?full_postcode=CA10%203EX`)
               let message = response.data;
@@ -73,7 +73,7 @@ function HomePage() {
           <br/>
           <br/>
           <hr/>
-          <br/> */}
+          <br/>
 
 
 
