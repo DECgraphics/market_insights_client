@@ -58,10 +58,19 @@ export const getPreviousMapCoordinates = createAsyncThunk(
     }
 )
 
+// export const getMinMaxLatLngLocations = createAsyncThunk(
+//     'map/getMinMaxLatLngLocations',
+//     async (latLng: MinMaxLatLng) => {
+//         const response = await fetch(`${baseUrl}/search/?min_lat=${latLng.minLat}&max_lat=${latLng.maxLat}&min_lon=${latLng.minLng}&max_lon=${latLng.maxLng}`)
+//         const coorditates = (await response.json()) as any[]
+//         return coorditates
+//     }
+// )
+
 export const getMinMaxLatLngLocations = createAsyncThunk(
     'map/getMinMaxLatLngLocations',
     async (latLng: MinMaxLatLng) => {
-        const response = await fetch(`${baseUrl}/search/?min_lat=${latLng.minLat}&max_lat=${latLng.maxLat}&min_lon=${latLng.minLng}&max_lon=${latLng.maxLng}`)
+        const response = await fetch(`${baseUrl}/search/npostcodes/?min_lat=${latLng.minLat}&max_lat=${latLng.maxLat}&min_lon=${latLng.minLng}&max_lon=${latLng.maxLng}`)
         const coorditates = (await response.json()) as any[]
         return coorditates
     }

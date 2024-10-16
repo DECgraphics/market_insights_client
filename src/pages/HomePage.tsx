@@ -41,7 +41,6 @@ function HomePage() {
           padding: 1,
           boxShadow: '10px 10px 10px grey;'
         }}>
-
           <p>Uid: {user?.uid}</p>
           <Button variant='contained' onClick={async () => {
             await auth.signOut()
@@ -51,11 +50,7 @@ function HomePage() {
           <br/>
           <hr/>
           <br/>
-
-
-
-          <Button variant='contained' onClick={async () => {
-
+          {/* <Button variant='contained' onClick={async () => {
             try {
               let response = await axios.get(`${baseUrl}/search/?full_postcode=CA10%203EX`)
               let message = response.data;
@@ -66,7 +61,7 @@ function HomePage() {
             } catch (error) {
               console.log(error)
             }
-          
+        
           }}>CA10 3EX</Button>
 
           <br/>
@@ -78,7 +73,7 @@ function HomePage() {
           <br/>
           <br/>
           <hr/>
-          <br/>
+          <br/> */}
 
 
 

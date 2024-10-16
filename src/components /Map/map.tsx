@@ -36,7 +36,7 @@ export default function Map() {
     }
 
 
-    const position: [number, number] = [48.8566, 2.3522]
+    const position: [number, number] = [51.52013634986723, -0.13121614162092013]
 
     let mapMarkers = coordinates.length > 0 ? (coordinates.map((geoMarker, i) => {
             return (
@@ -47,7 +47,6 @@ export default function Map() {
                 </Marker>
             )
     })): null
-
 
     let geojsonFeatureCollection: geojson.FeatureCollection = {
         "type": "FeatureCollection",
