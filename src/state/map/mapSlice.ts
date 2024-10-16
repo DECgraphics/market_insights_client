@@ -42,8 +42,8 @@ const mapSlice = createSlice({
         builder.addCase(getMinMaxLatLngLocations.pending, () => {
             console.log('response pending')
         }).addCase(getMinMaxLatLngLocations.fulfilled, (state, action: PayloadAction<any[]>) => {
-            console.log(action.payload)
-            state.response = action.payload
+            console.log(action.payload.length)
+            state.coordinates = action.payload
         })
 
     }
@@ -57,15 +57,6 @@ export const getPreviousMapCoordinates = createAsyncThunk(
         return coorditates
     }
 )
-
-// export const getMinMaxLatLngLocations = createAsyncThunk(
-//     'map/getMinMaxLatLngLocations',
-//     async (latLng: MinMaxLatLng) => {
-//         const response = await fetch(`${baseUrl}/search/?min_lat=${latLng.minLat}&max_lat=${latLng.maxLat}&min_lon=${latLng.minLng}&max_lon=${latLng.maxLng}`)
-//         const coorditates = (await response.json()) as any[]
-//         return coorditates
-//     }
-// )
 
 export const getMinMaxLatLngLocations = createAsyncThunk(
     'map/getMinMaxLatLngLocations',

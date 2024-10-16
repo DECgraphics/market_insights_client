@@ -10,7 +10,7 @@ import { unauthorise } from '../state/auth/authSlice';
 import Map from '../components /Map/map';
 
 import axios from 'axios'
-import { getMinMaxLatLngLocations } from '../state/map/mapSlice';
+import { clearMap, getMinMaxLatLngLocations } from '../state/map/mapSlice';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
@@ -79,6 +79,7 @@ function HomePage() {
 
           <Button variant='contained' onClick={async () => {
 
+            dispatch(clearMap())
             dispatch(getMinMaxLatLngLocations(minMaxLatLng))
           
           }}>Search</Button>
